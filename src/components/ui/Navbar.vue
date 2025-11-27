@@ -1,28 +1,38 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { Menu, X, Dumbbell } from 'lucide-vue-next'
 
-const props = defineProps({
-  currentPage: { type: String, default: 'home' },
-  // Optional callback to mirror the React API
-  onNavigate: { type: Function, default: null },
-})
+const emit = defineEmits(['openBMI'])
 
-const emit = defineEmits(['navigate'])
-
+const route = useRoute()
+const router = useRouter()
 const isMenuOpen = ref(false)
 
 const menuItems = [
-  { id: 'home', label: 'Beranda' },
-  { id: 'workout', label: 'Program Latihan' },
-  { id: 'nutrition', label: 'Nutrisi' },
-  { id: 'tracker', label: 'Tracker' },
-  { id: 'about', label: 'Tentang' },
+  { id: 'home', label: 'Beranda', path: '/' },
+  { id: 'workout', label: 'Program Latihan', path: '/workout' },
+  { id: 'nutrition', label: 'Nutrisi', path: '/nutrition' },
+  { id: 'tracker', label: 'Tracker', path: '#' },
+  { id: 'about', label: 'Tentang', path: '/about' },
 ]
 
-const navigate = (page) => {
-  if (props.onNavigate) props.onNavigate(page)
-  emit('navigate', page)
+const currentPath = computed(() => route.path)
+
+const isActive = (path) => {
+  return currentPath.value === path
+}
+
+const navigate = (item) => {
+  if (item.id === 'tracker') {
+    emit('openBMI')
+  } else if (item.path === '#') {
+    // Placeholder for pages that don't exist yet
+    return
+  } else {
+    router.push(item.path)
+  }
+  isMenuOpen.value = false
 }
 </script>
 
@@ -31,24 +41,21 @@ const navigate = (page) => {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <!-- Logo -->
-        <button
-          class="flex items-center gap-2 cursor-pointer"
-          @click="navigate('home')"
-        >
+        <RouterLink to="/" class="flex items-center gap-2">
           <Dumbbell class="w-8 h-8 text-teal-600" />
-          <span class="bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">FitLife</span>
-        </button>
+          <span class="bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent font-bold text-xl">FitLife</span>
+        </RouterLink>
 
         <!-- Desktop Menu -->
         <div class="hidden md:flex space-x-8">
           <button
             v-for="item in menuItems"
             :key="item.id"
-            @click="navigate(item.id)"
+            @click="navigate(item)"
             :class="[
               'px-3 py-2 rounded-md transition-colors',
-              props.currentPage === item.id
-                ? 'text-teal-600 bg-teal-50'
+              isActive(item.path)
+                ? 'text-teal-600 bg-teal-50 font-medium'
                 : 'text-gray-700 hover:text-teal-600',
             ]"
           >
@@ -72,11 +79,11 @@ const navigate = (page) => {
         <button
           v-for="item in menuItems"
           :key="item.id"
-          @click="navigate(item.id); isMenuOpen = false"
+          @click="navigate(item)"
           :class="[
             'block w-full text-left px-4 py-2 rounded-md transition-colors',
-            props.currentPage === item.id
-              ? 'text-teal-600 bg-teal-50'
+            isActive(item.path)
+              ? 'text-teal-600 bg-teal-50 font-medium'
               : 'text-gray-700 hover:bg-gray-50',
           ]"
         >

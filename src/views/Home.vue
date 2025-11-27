@@ -1,23 +1,23 @@
 <script setup>
-import Hero from './ui/Hero.vue'
-import FeatureCard from './ui/FeatureCard.vue'
+import Hero from '../components/ui/Hero.vue'
+import FeatureCard from '../components/ui/FeatureCard.vue'
 import { Zap, Apple, LineChart, Calculator, MessageCircle } from 'lucide-vue-next'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-const props = defineProps({
-  onNavigate: { type: Function, default: null },
-  onOpenBMI: { type: Function, default: null },
-})
-
-const emit = defineEmits(['navigate', 'openBMI'])
+const router = useRouter()
+const showBMI = ref(false)
 
 const navigate = (page) => {
-  if (props.onNavigate) props.onNavigate(page)
-  emit('navigate', page)
+  if (page === 'about') {
+    router.push('/about')
+  } else if (page === 'home') {
+    router.push('/')
+  }
 }
 
 const openBMI = () => {
-  if (props.onOpenBMI) props.onOpenBMI()
-  emit('openBMI')
+  showBMI.value = true
 }
 </script>
 
@@ -85,7 +85,6 @@ const openBMI = () => {
       </div>
     </section>
   </div>
-  
 </template>
 
 <style scoped>

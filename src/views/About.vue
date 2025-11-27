@@ -1,7 +1,10 @@
 <script setup>
 import { Heart, ListChecks, Apple, MessageCircle } from 'lucide-vue-next'
-import ImageWithFallback from './ui/ImageWithFallback.vue'
-import FeatureCard from './ui/FeatureCard.vue'
+import ImageWithFallback from '../components/ui/ImageWithFallback.vue'
+import FeatureCard from '../components/ui/FeatureCard.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const features = [
 	{
@@ -30,6 +33,10 @@ const features = [
 		color: 'cyan',
 	},
 ]
+
+const handleGetStarted = () => {
+	router.push('/')
+}
 </script>
 
 <template>
@@ -81,7 +88,10 @@ const features = [
 			<div class="max-w-4xl mx-auto bg-gradient-to-br from-teal-600 via-teal-500 to-cyan-600 rounded-2xl p-8 md:p-12 text-white text-center shadow-xl">
 				<h2 class="mb-4 text-2xl md:text-3xl font-semibold">Tunggu apa lagi?</h2>
 				<p class="mb-8 text-teal-50">Temukan manfaat nyata bersama FitLife hari ini</p>
-				<button class="bg-white text-teal-600 px-8 py-3 rounded-lg hover:bg-teal-50 transition-colors shadow-lg">
+				<button 
+					@click="handleGetStarted"
+					class="bg-white text-teal-600 px-8 py-3 rounded-lg hover:bg-teal-50 transition-colors shadow-lg"
+				>
 					Mulai Sekarang
 				</button>
 			</div>
