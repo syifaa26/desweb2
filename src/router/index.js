@@ -43,6 +43,22 @@ const routes = [
             title: 'Konsultasi - FitLife'
         }
     },
+    {
+        path: '/tracker',
+        name: 'Tracker',
+        component: () => import('../pages/TrackerPage.vue'),
+        meta: {
+            title: 'Tracker Progres - FitLife'
+        }
+    },
+    {
+        path: '/profile', 
+        name: 'Profile',
+        component: () => import('../views/profile.vue'),
+        meta: {
+            title: 'Profil Saya - FitLife'
+        }
+    },
     // Route untuk halaman yang belum ada (404)
     {
         path: '/:pathMatch(.*)*',

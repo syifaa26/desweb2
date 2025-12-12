@@ -1,7 +1,14 @@
 <script setup>
 import { Heart, ListChecks, Apple, MessageCircle } from 'lucide-vue-next'
+import { useRouter } from 'vue-router'
 import ImageWithFallback from '../components/ui/ImageWithFallback.vue'
 import FeatureCard from '../components/ui/FeatureCard.vue'
+
+const router = useRouter()
+
+const goToWorkout = () => {
+	router.push('/workout')
+}
 
 const features = [
 	{
@@ -81,7 +88,10 @@ const features = [
 			<div class="max-w-4xl mx-auto bg-gradient-to-br from-teal-600 via-teal-500 to-cyan-600 rounded-2xl p-8 md:p-12 text-white text-center shadow-xl">
 				<h2 class="mb-4 text-2xl md:text-3xl font-semibold">Tunggu apa lagi?</h2>
 				<p class="mb-8 text-teal-50">Temukan manfaat nyata bersama FitLife hari ini</p>
-				<button class="bg-white text-teal-600 px-8 py-3 rounded-lg hover:bg-teal-50 transition-colors shadow-lg">
+				<button 
+					@click="goToWorkout"
+					class="bg-white text-teal-600 px-8 py-3 rounded-lg hover:bg-teal-50 transition-colors shadow-lg"
+				>
 					Mulai Sekarang
 				</button>
 			</div>

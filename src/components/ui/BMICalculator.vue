@@ -12,6 +12,7 @@ const weight = ref('')
 const height = ref('')
 const bmi = ref(null)
 const category = ref('')
+const categoryColor = ref('')
 
 const calculateBMI = () => {
   const weightNum = parseFloat(weight.value)
@@ -22,10 +23,19 @@ const calculateBMI = () => {
     const rounded = parseFloat(bmiValue.toFixed(1))
     bmi.value = rounded
 
-    if (bmiValue < 18.5) category.value = 'Kurus'
-    else if (bmiValue < 25) category.value = 'Normal'
-    else if (bmiValue < 30) category.value = 'Gemuk'
-    else category.value = 'Obesitas'
+    if (bmiValue < 18.5) {
+      category.value = 'Kurus'
+      categoryColor.value = 'text-yellow-600 bg-yellow-50 border-yellow-200'
+    } else if (bmiValue < 25) {
+      category.value = 'Normal'
+      categoryColor.value = 'text-green-600 bg-green-50 border-green-200'
+    } else if (bmiValue < 30) {
+      category.value = 'Gemuk'
+      categoryColor.value = 'text-red-500 bg-red-50 border-red-200'
+    } else {
+      category.value = 'Obesitas'
+      categoryColor.value = 'text-gray-900 bg-gray-100 border-gray-300'
+    }
   }
 }
 
@@ -34,6 +44,7 @@ const resetCalculator = () => {
   height.value = ''
   bmi.value = null
   category.value = ''
+  categoryColor.value = ''
 }
 </script>
 
@@ -80,8 +91,13 @@ const resetCalculator = () => {
 
         <div v-if="bmi !== null" class="bg-gradient-to-br from-teal-50 to-cyan-50 p-4 rounded-lg border border-teal-200">
           <p class="text-center text-gray-700 mb-2">BMI Anda:</p>
-          <p class="text-center text-3xl bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent mb-2">{{ bmi }}</p>
-          <p class="text-center text-gray-600">Kategori: {{ category }}</p>
+          <p class="text-center text-3xl bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent mb-3">{{ bmi }}</p>
+          <div 
+            class="text-center py-2 px-4 rounded-lg border font-medium"
+            :class="categoryColor"
+          >
+            Kategori: {{ category }}
+          </div>
         </div>
 
         <div class="flex gap-3">

@@ -13,8 +13,10 @@ const menuItems = [
   { id: 'home', label: 'Beranda', path: '/' },
   { id: 'workout', label: 'Program Latihan', path: '/workout' },
   { id: 'nutrition', label: 'Nutrisi', path: '/nutrition' },
-  { id: 'tracker', label: 'Tracker', path: '#' },
+  { id: 'tracker', label: 'Tracker', path: '/tracker' },
   { id: 'about', label: 'Tentang', path: '/about' },
+  { id: 'profile', label: 'Profile', path: '/profile' },
+
 ]
 
 const currentPath = computed(() => route.path)
@@ -24,14 +26,7 @@ const isActive = (path) => {
 }
 
 const navigate = (item) => {
-  if (item.id === 'tracker') {
-    emit('openBMI')
-  } else if (item.path === '#') {
-    // Placeholder for pages that don't exist yet
-    return
-  } else {
-    router.push(item.path)
-  }
+  router.push(item.path)
   isMenuOpen.value = false
 }
 </script>

@@ -1,5 +1,19 @@
 <script setup>
 import { Dumbbell, Mail, Phone, MapPin } from 'lucide-vue-next'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const quickLinks = [
+  { label: 'Beranda', path: '/' },
+  { label: 'Program Latihan', path: '/workout' },
+  { label: 'Nutrisi', path: '/nutrition' },
+  { label: 'Tracker', path: '/tracker' }
+]
+
+const navigateTo = (path) => {
+  router.push(path)
+}
 </script>
 
 <template>
@@ -21,10 +35,14 @@ import { Dumbbell, Mail, Phone, MapPin } from 'lucide-vue-next'
         <div>
           <h3 class="text-white mb-4">Link Cepat</h3>
           <ul class="space-y-2">
-            <li><a href="#" class="hover:text-cyan-500 transition-colors">Beranda</a></li>
-            <li><a href="#" class="hover:text-cyan-500 transition-colors">Program Latihan</a></li>
-            <li><a href="#" class="hover:text-cyan-500 transition-colors">Nutrisi</a></li>
-            <li><a href="#" class="hover:text-cyan-500 transition-colors">Tracker</a></li>
+            <li v-for="link in quickLinks" :key="link.path">
+              <button 
+                @click="navigateTo(link.path)" 
+                class="hover:text-cyan-500 transition-colors cursor-pointer text-left"
+              >
+                {{ link.label }}
+              </button>
+            </li>
           </ul>
         </div>
 

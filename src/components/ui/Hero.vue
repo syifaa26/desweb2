@@ -1,17 +1,12 @@
 <script setup>
 import { ArrowRight } from 'lucide-vue-next'
+import { useRouter } from 'vue-router'
 import ImageWithFallback from './ImageWithFallback.vue'
 
-const props = defineProps({
-  // Optional callback prop to mirror the React API
-  onNavigate: { type: Function, default: null },
-})
+const router = useRouter()
 
-const emit = defineEmits(['navigate'])
-
-const handleClick = () => {
-  if (props.onNavigate) props.onNavigate('workout')
-  emit('navigate', 'workout')
+const goToWorkout = () => {
+  router.push('/workout')
 }
 </script>
 
@@ -31,7 +26,7 @@ const handleClick = () => {
           Panduan lengkap olahraga dan gaya hidup sehat untuk mencapai tubuh impianmu
         </p>
         <button
-          @click="handleClick"
+          @click="goToWorkout"
           class="bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white px-8 py-3 rounded-lg inline-flex items-center gap-2 transition-all"
         >
           Mulai Sekarang
