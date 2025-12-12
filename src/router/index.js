@@ -51,12 +51,12 @@ const routes = [
             title: 'Tracker Progres - FitLife'
         }
     },
-    {
-        path: '/profile', 
-        name: 'Profile',
-        component: () => import('../views/profile.vue'),
+     {
+        path: '/profil',
+        name: 'profil',
+        component: () => import('../pages/profil.vue'),
         meta: {
-            title: 'Profil Saya - FitLife'
+            title: 'profil - FitLife'
         }
     },
     // Route untuk halaman yang belum ada (404)

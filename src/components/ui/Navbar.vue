@@ -15,7 +15,7 @@ const menuItems = [
   { id: 'nutrition', label: 'Nutrisi', path: '/nutrition' },
   { id: 'tracker', label: 'Tracker', path: '/tracker' },
   { id: 'about', label: 'Tentang', path: '/about' },
-  { id: 'profile', label: 'Profile', path: '/profile' },
+  { id: 'profil', label: 'profil', path: '/profil'},
 
 ]
 
