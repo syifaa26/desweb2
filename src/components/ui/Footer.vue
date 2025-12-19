@@ -51,16 +51,16 @@ const navigateTo = (path) => {
           <h3 class="text-white mb-4">Kontak Kami</h3>
           <ul class="space-y-3">
             <li class="flex items-center gap-2">
-              <Mail class="w-4 h-4" />
-              <span>info@fitlife.com</span>
+              <Mail class="w-4 h-4 text-cyan-500" />
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@fitlife.com" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-500 transition-colors">info@fitlife.com</a>
             </li>
             <li class="flex items-center gap-2">
-              <Phone class="w-4 h-4" />
-              <span>+62 85172148011</span>
+              <Phone class="w-4 h-4 text-cyan-500" />
+              <a href="https://wa.me/6285172148011" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-500 transition-colors">+62 85172148011</a>
             </li>
             <li class="flex items-center gap-2">
-              <MapPin class="w-4 h-4" />
-              <span>Balikpapan. Kalimantan</span>
+              <MapPin class="w-4 h-4 text-cyan-500" />
+              <a href="https://www.google.com/maps/search/?api=1&query=Balikpapan+Kalimantan" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-500 transition-colors">Balikpapan. Kalimantan</a>
             </li>
           </ul>
         </div>

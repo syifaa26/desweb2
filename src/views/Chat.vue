@@ -387,22 +387,40 @@ const handleSendMessage = () => {
   const userInput = inputMessage.value
   inputMessage.value = ''
 
+  // Cek jika pesan user random/asal (hanya huruf tanpa spasi dan panjang > 5)
+  const isRandomText = /^[A-Za-z]+$/.test(userInput.trim()) && 
+    userInput.trim().length > 5 && 
+    !userInput.trim().toLowerCase().match(/^(halo|hai|hi|hello|hey|bye|dadah|terima|makasih|thanks|apa|siapa|bagaimana|gimana|latihan|workout|olahraga|nutrisi|makanan|makan|protein|diet|berat|otot|sixpack|perut|pemula|beginner|intermediate|advanced|tips|motivasi|semangat|mulai|start|tidur|istirahat|stress|malas|pagi|malam|sore|weekend)$/i);
+  
+  if (isRandomText) {
+    isTyping.value = true;
+    setTimeout(() => {
+      const consultantMessage = {
+        id: messages.value.length + 1,
+        text: 'Maaf, saya tidak memahami pesan Anda. 😅\n\nMohon masukkan pertanyaan atau kata yang lebih jelas ya!',
+        sender: 'consultant',
+        timestamp: new Date(),
+        quickReplies: ['Rekomendasi latihan untuk saya', 'Tips nutrisi & diet', 'Cara menurunkan berat badan', 'Cara membentuk otot']
+      };
+      messages.value.push(consultantMessage);
+      isTyping.value = false;
+    }, 1200);
+    return;
+  }
+
   // Simulate consultant typing and response
   isTyping.value = true
   setTimeout(() => {
     const smartResponse = getSmartResponse(userInput)
-    
     // Handle response with quick replies
     let responseText = ''
     let quickReplies = []
-    
     if (typeof smartResponse === 'object') {
       responseText = smartResponse.text
       quickReplies = smartResponse.quickReplies || []
     } else {
       responseText = smartResponse
     }
-    
     const consultantMessage = {
       id: messages.value.length + 1,
       text: responseText,
